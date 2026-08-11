@@ -1,0 +1,25 @@
+# Python cache
+__pycache__/
+
+# Virtual environment (hidden folder)
+.quantum-dev-env/
+
+# Results and plots (generated outputs)
+results/
+plots/
+
+# Documentation (ignore for now)
+docs/
+
+# Logs
+*.log
+
+# Jupyter scratch files
+.ipynb_checkpoints/
+
+# OS-specific junk
+.DS_Store
+Thumbs.db
+
+# Environment variables / secrets
+.env
