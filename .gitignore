@@ -4,6 +4,9 @@ __pycache__/
 # Virtual environment (hidden folder)
 .quantum-dev-env/
 
+# VS Code settings
+.vscode/
+
 # Results and plots (generated outputs)
 results/
 plots/
