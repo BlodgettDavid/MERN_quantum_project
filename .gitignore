@@ -7,12 +7,15 @@ __pycache__/
 # VS Code settings
 .vscode/
 
-# Results and plots (generated outputs)
-results/
-plots/
+# Results and plots (generated outputs, keep folder via .gitkeep)
+results/*
+!results/.gitkeep
 
-# Documentation (ignore for now)
-docs/
+plots/*
+!plots/.gitkeep
+
+# Documentation (ignore only private notes, not whole folder)
+docs/notes.txt
 
 # Logs
 *.log
@@ -26,3 +29,11 @@ Thumbs.db
 
 # Environment variables / secrets
 .env
+src/server/.env
+
+# Node dependencies
+client/node_modules/
+src/server/node_modules/
+
+# Next.js build output
+client/.next/
