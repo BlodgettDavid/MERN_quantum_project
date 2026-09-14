@@ -1,52 +1,59 @@
-## Non-Python Requirements
+# Quantum Algorithm Dashboard
 
-This project uses both Python and Node.js stacks.  
-Python handles the quantum libraries and analytics, while Node.js powers the frontend (Next.js) and backend (Express + MongoDB).
+An interactive quantum computing dashboard powered by a Python microservices architecture and a Next.js web frontend.
 
-### Required Software
-- Python 3.11+ with virtual environment (`.quantum-dev-env`)
-- Node.js v20+ and npm (comes bundled with Node.js)
-- MongoDB (local install or Atlas cloud instance)
-- Git (already initialized in this repo)
+## Software Requirements
 
-### Version Checks
-Verify installations:
-- `node -v` → should be v20+
-- `npm -v` → should be v12+
-- `mongod --version` → confirm MongoDB is installed
+- Python 3.11+
+- Node.js v20+ with npm
+- Git
 
-### Setup Instructions
+## Setup & Quick Start
 
-#### Backend (Express + Quantum)
-cd src/server  
-npm install  
-node index.js  
+### 1. Python Environment Setup
+From the project root:
 
-Runs the Express API server, connects to MongoDB (local or Atlas), and can call into quantum code in `src/`.
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
 
-#### Frontend (Next.js)
-cd client  
-npm install  
-npm run dev  
+### 2. Frontend Dependencies
+cd client
+npm install
+cd ..
 
-Starts the Next.js development server, accessible at http://localhost:3000, with hot‑reload on file changes.
+### 3. Launching All Services (Windows)
+Run the automated batch script from the root directory to launch all 4 microservices in separate windows simultaneously:
 
-### Environment Variables
-- Place secrets (e.g., MongoDB connection string) in a `.env` file.
-- Example: `MONGO_URI=mongodb://localhost:27017/quantumdb`
-- Ensure `.env` is excluded via `.gitignore`.
+start_all.bat
 
-### Repo Structure
-quantum-project/  
-  client/        <-- Next.js frontend  
-  src/           <-- Backend + quantum code  
-    server/      <-- Express API  
-  utils/         <-- Helper scripts  
-  results/       <-- Output data  
-  plots/         <-- Visualizations  
-  .quantum-dev-env/ <-- Python virtual environment  
+This will automatically launch:
+- Grover Microservice (Port 8001)
+- Teleportation Microservice (Port 8002)
+- Quantum Gateway API (Port 8000)
+- Next.js Web Client (Port 3000)
 
-### Notes
-- Python venv is isolated from Node.js stack — they run separately.
-- Anyone cloning this repo must install both Python and Node.js stacks.
-- MongoDB can be local or cloud; update `.env` accordingly.
+Once running, access the dashboard at http://localhost:3000.
+
+## Repository Structure
+
+quantum-project/
+├── client/                     <-- Next.js frontend application
+│   ├── app/                    <-- Next.js App Router pages
+│   └── components/             <-- React UI components
+├── src/
+│   ├── algorithms/
+│   │   ├── grover/             <-- Grover search implementation & service (Port 8001)
+│   │   └── teleportation/      <-- Teleportation implementation & service (Port 8002)
+│   └── quantum_service.py      <-- Main Quantum Gateway service (Port 8000)
+├── utils/                      <-- ASCII and plotting helper modules
+├── plots/                      <-- Generated visualization outputs (.png)
+├── results/                    <-- Generated statevector/circuit text outputs (.txt)
+├── .venv/                      <-- Local Python virtual environment (ignored by Git)
+├── start_all.bat               <-- One-click batch launcher for local development
+└── requirements.txt            <-- Python package dependencies
+
+## Notes
+- Python virtual environment dependencies are isolated within .venv/
+- The Next.js client connects directly to the Quantum Gateway (http://localhost:8000)
+- Generated circuit ASCII files, statevectors, Bloch spheres, and histograms are saved to results/ and plots/ and served dynamically for browser download.

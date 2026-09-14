@@ -1,20 +1,29 @@
-# Python cache
+# Python cache & bytecode
 __pycache__/
+*.py[cod]
+*$py.class
 
-# Virtual environment (hidden folder)
-.quantum-dev-env/
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
 
-# VS Code settings
-.vscode/
+# Preserved output directories (ignore generated contents, keep folder via .gitkeep)
+data/*
+!data/.gitkeep
 
-# Results and plots (generated outputs, keep folder via .gitkeep)
 results/*
 !results/.gitkeep
 
 plots/*
 !plots/.gitkeep
 
-# Documentation (ignore only private notes, not whole folder)
+# VS Code & Editor settings
+.vscode/
+.idea/
+
+# Documentation
 docs/notes.txt
 
 # Logs
@@ -27,13 +36,13 @@ docs/notes.txt
 .DS_Store
 Thumbs.db
 
-# Environment variables / secrets
+# Environment variables & secrets
 .env
+*.env
 src/server/.env
 
-# Node dependencies
+# Node & Next.js build artifacts
 client/node_modules/
-src/server/node_modules/
-
-# Next.js build output
 client/.next/
+client/out/
+src/server/node_modules/

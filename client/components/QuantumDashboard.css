@@ -1,0 +1,46 @@
+.dashboard {
+  font-family: "Courier New", monospace;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.results {
+  margin-top: 20px;
+}
+
+.circuit {
+  background: #222;
+  color: #0f0;
+  padding: 15px;
+  border-radius: 6px;
+  overflow-x: auto;
+  white-space: pre;
+  max-width: 600px;
+}
+
+.plots {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.plots img {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  padding: 5px;
+}
+
+.downloads {
+  margin-top: 15px;
+}
+
+.downloads a {
+  color: #007acc;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.downloads a:hover {
+  text-decoration: underline;
+}
