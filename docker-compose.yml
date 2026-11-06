@@ -1,0 +1,28 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mern_quantum_backend
+    command: python -m src.quantum_service
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./results:/app/results
+      - ./plots:/app/plots
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: always
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: mern_quantum_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    restart: always
