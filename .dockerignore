@@ -1,0 +1,21 @@
+# Python / Virtual Environment
+.venv/
+__pycache__/
+*.pyc
+
+# Node Modules
+node_modules/
+client/node_modules/
+.next/
+
+# Project Data & Outputs
+results/
+plots/
+data/
+
+# Git & IDEs
+.git/
+.vscode/
+
+# Environment variables (if sensitive)
+.env

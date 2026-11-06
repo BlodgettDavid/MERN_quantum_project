@@ -1,59 +1,53 @@
 # Quantum Algorithm Dashboard
 
-An interactive quantum computing dashboard powered by a Python microservices architecture and a Next.js web frontend.
+An interactive quantum computing dashboard powered by a Dockerized Python microservices backend and a Next.js web frontend.
 
 ## Software Requirements
 
-- Python 3.11+
-- Node.js v20+ with npm
+- Docker & Docker Compose (Recommended)
+- Node.js v20+ (if running frontend standalone)
+- Python 3.11+ (if running backend standalone)
 - Git
 
-## Setup & Quick Start
+## Setup & Quick Start (Docker Architecture)
 
-### 1. Python Environment Setup
-From the project root:
+The application uses Docker Compose to manage and orchestrate both the Next.js frontend and the Python quantum gateway backend in isolated containers.
 
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
+### 1. Clone & Navigate to Project
+From your terminal:
+cd MERN_quantum_project
 
-### 2. Frontend Dependencies
-cd client
-npm install
-cd ..
+### 2. Launch All Services via Docker Compose
+Build and start the containerized architecture:
+docker-compose up --build
 
-### 3. Launching All Services (Windows)
-Run the automated batch script from the root directory to launch all 4 microservices in separate windows simultaneously:
-
-start_all.bat
-
-This will automatically launch:
-- Grover Microservice (Port 8001)
-- Teleportation Microservice (Port 8002)
-- Quantum Gateway API (Port 8000)
-- Next.js Web Client (Port 3000)
+This automatically builds and launches:
+- **Backend Service (`mern_quantum_backend`)**: Python dynamic quantum gateway running on port 8000.
+- **Frontend Service (`mern_quantum_frontend`)**: Next.js web application running on port 3000.
 
 Once running, access the dashboard at http://localhost:3000.
 
+### 3. Stopping Services
+To stop and remove the containers, run:
+docker-compose down
+
 ## Repository Structure
 
-quantum-project/
-├── client/                     <-- Next.js frontend application
+mern_quantum_project/
+├── client/                     <-- Next.js frontend application (Standalone output)
 │   ├── app/                    <-- Next.js App Router pages
 │   └── components/             <-- React UI components
 ├── src/
-│   ├── algorithms/
-│   │   ├── grover/             <-- Grover search implementation & service (Port 8001)
-│   │   └── teleportation/      <-- Teleportation implementation & service (Port 8002)
-│   └── quantum_service.py      <-- Main Quantum Gateway service (Port 8000)
-├── utils/                      <-- ASCII and plotting helper modules
+│   ├── modules/                <-- Auto-discovered quantum algorithm modules (Grover, Teleportation, etc.)
+│   ├── base.py                 <-- Base algorithm class interface
+│   └── quantum_service.py      <-- Main Dynamic Quantum Gateway Flask service (Port 8000)
 ├── plots/                      <-- Generated visualization outputs (.png)
 ├── results/                    <-- Generated statevector/circuit text outputs (.txt)
-├── .venv/                      <-- Local Python virtual environment (ignored by Git)
-├── start_all.bat               <-- One-click batch launcher for local development
+├── Dockerfile                  <-- Backend container specification
+├── docker-compose.yml          <-- Multi-service orchestration configuration
 └── requirements.txt            <-- Python package dependencies
 
 ## Notes
-- Python virtual environment dependencies are isolated within .venv/
-- The Next.js client connects directly to the Quantum Gateway (http://localhost:8000)
-- Generated circuit ASCII files, statevectors, Bloch spheres, and histograms are saved to results/ and plots/ and served dynamically for browser download.
+- Python and Node.js dependencies are fully containerized, eliminating the need for a local `.venv` or manual dependency installation.
+- The Next.js client connects directly to the Quantum Gateway via environment configuration.
+- Generated circuit ASCII files, statevectors, Bloch spheres, and histograms are saved to `results/` and `plots/` via volume mounts and served dynamically for browser download.
